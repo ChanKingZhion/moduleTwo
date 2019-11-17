@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-view',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPage implements OnInit {
 
-  constructor() { }
+  data = [];
+  title:any;
+  description:any;
+  price:any;
+  image:any
 
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.data = this.router.getCurrentNavigation().extras.state.data;
+        console.log("Data is", this.data)
+      }
+    })
+  }
   ngOnInit() {
   }
+
+  //ionViewWillEnter(){
+   // this.viewData();
+  //}
+
+  //viewData(){
+  //  let title;
+  //  this.data.map(value=>{
+  //    this.title=value.title
+  //  });
+  //  this.title;
+  //}
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
-import { NavigationExtras } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -30,7 +30,7 @@ export class Tab1Page implements OnInit {
       image: "bag3.jpg"
     }
   ];
-  constructor(private toast: ToastController) { }
+  constructor(private toast: ToastController, private router: Router) { }
 
   ngOnInit() {
   }
@@ -48,17 +48,16 @@ export class Tab1Page implements OnInit {
     toast.present();
   }
 
-  submit(item, id) {
+  submit(id) {
 
     // this.data.splice(id,1); //to remove a data//
-    console.log("Data bag", item);
     console.log("Data id", id);
     let navigationExtras: NavigationExtras = {
 
       state: {
-        item: item
+        data: this.data[id]
       }
     }
-
+    this.router.navigate(['view'], navigationExtras);
   }
 }
